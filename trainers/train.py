@@ -218,8 +218,8 @@ def train(args, train_dataset, model, tokenizer):
             # (2) Compute the loss (store as `loss` variable)
             # Hint: See the HuggingFace transformers doc to properly get
             # the loss from the model outputs.
-            raise NotImplementedError("Please finish the TODO!")
-
+            outputs = model(inputs)
+            loss = outputs.loss
             if args.n_gpu > 1:
                 # Applies mean() to average on multi-gpu parallel training.
                 loss = loss.mean()
@@ -230,8 +230,7 @@ def train(args, train_dataset, model, tokenizer):
                 loss = loss / args.gradient_accumulation_steps
 
             # (3) Implement the backward for loss propagation
-            raise NotImplementedError("Please finish the TODO!")
-
+            loss.backward()
             # End of TODO.
             ##################################################
 
@@ -377,8 +376,7 @@ def evaluate(args, model, tokenizer, prefix="", data_split="test"):
             ##################################################
             # TODO: Evaluation Loop
             # (1) Run forward and get the model outputs
-            raise NotImplementedError("Please finish the TODO!")
-
+            outputs = model(inputs)
             if has_label or args.training_phase == "pretrain":
                 # (2) If label present or pretraining, compute the loss and prediction logits
                 # Label the loss as `eval_loss` and logits as `logits`
@@ -387,16 +385,16 @@ def evaluate(args, model, tokenizer, prefix="", data_split="test"):
                 # indexing properly the outputs as tuples.
                 # Make sure to perform a `.mean()` on the eval loss and add it
                 # to the `eval_loss` variable.
-                raise NotImplementedError("Please finish the TODO!")
+                eval_loss = outputs.loss
+                logits = outputs.logits
+                eval_loss = eval_loss.mean()
             else:
                 # (3) If labels not present, only compute the prediction logits
                 # Label the logits as `logits`
-                raise NotImplementedError("Please finish the TODO!")
-
+                logits = outputs.logits
             # (4) Convert logits into probability distribution and relabel as `logits`
             # Hint: Refer to Softmax function
-            raise NotImplementedError("Please finish the TODO!")
-
+            logits = torch.nn.functional.softmax(logits)
             # End of TODO.
             ##################################################
 
@@ -611,19 +609,17 @@ def main():
     # for essential args.
 
     # (1) Load config
-    raise NotImplementedError("Please finish the TODO!")
-
+    config = AutoConfig.from_pretrained('bert-base-uncased')
     # (2) Load tokenizer
-    raise NotImplementedError("Please finish the TODO!")
+    tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 
     if args.training_phase == "pretrain":
         # (3) Load MLM model if pretraining (Optional)
         # Complete only if doing MLM pretraining for improving performance
-        raise NotImplementedError("Please finish the TODO!")
+        print("a")
     else:
         # (4) Load sequence classification model otherwise
-        raise NotImplementedError("Please finish the TODO!")
-
+        model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased')
     # End of TODO.
     ##################################################
 
