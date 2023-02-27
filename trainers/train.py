@@ -218,7 +218,7 @@ def train(args, train_dataset, model, tokenizer):
             # (2) Compute the loss (store as `loss` variable)
             # Hint: See the HuggingFace transformers doc to properly get
             # the loss from the model outputs.
-            outputs = model(inputs)
+            outputs = model(**inputs)
             loss = outputs.loss
             if args.n_gpu > 1:
                 # Applies mean() to average on multi-gpu parallel training.
@@ -376,7 +376,7 @@ def evaluate(args, model, tokenizer, prefix="", data_split="test"):
             ##################################################
             # TODO: Evaluation Loop
             # (1) Run forward and get the model outputs
-            outputs = model(inputs)
+            outputs = model(**inputs)
             if has_label or args.training_phase == "pretrain":
                 # (2) If label present or pretraining, compute the loss and prediction logits
                 # Label the loss as `eval_loss` and logits as `logits`
