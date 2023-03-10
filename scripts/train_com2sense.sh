@@ -1,13 +1,15 @@
 TASK_NAME="com2sense"
 DATA_DIR="datasets/com2sense"
-MODEL_TYPE="bert-base-cased"
+MODEL_TYPE="bert-base-uncased"
 
 
 python3 -m trainers.train \
   --model_name_or_path ${MODEL_TYPE} \
+  --do_lower_case \
   --do_not_load_optimizer \
   --do_train \
   --do_eval \
+  --evaluate_during_training\
   --per_gpu_train_batch_size 4 \
   --per_gpu_eval_batch_size 8 \
   --learning_rate 1e-5 \
