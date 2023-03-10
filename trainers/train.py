@@ -609,9 +609,11 @@ def main():
     # for essential args.
 
     # (1) Load config
-    config = AutoConfig.from_pretrained('bert-base-uncased')
+    # config = AutoConfig.from_pretrained('bert-base-uncased')
+    config = AutoConfig.from_pretrained(args.model_name_or_path)
     # (2) Load tokenizer
-    tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+    # tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
 
     if args.training_phase == "pretrain":
         # (3) Load MLM model if pretraining (Optional)
@@ -619,7 +621,8 @@ def main():
         print("a")
     else:
         # (4) Load sequence classification model otherwise
-        model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased')
+        # model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased')
+        model = AutoModelForSequenceClassification.from_pretrained(args.model_name_or_path)
     # End of TODO.
     ##################################################
 
