@@ -27,3 +27,4 @@ python3 -m trainers.train \
   --iters_to_eval 20 40 \
   --overwrite_output_dir \
   --max_eval_steps 1000 \
+  --eval_split "dev"
