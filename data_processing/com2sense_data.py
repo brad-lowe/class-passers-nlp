@@ -68,10 +68,11 @@ class Com2SenseDataProcessor(DataProcessor):
         for i in range(len(data)):
             label_1 = None
             label_2 = None
-            print(data[i].keys())
+
             if 'label_1' in data[i].keys():
-                print("this ran")
                 label_1 = 1 if data[i]['label_1'] == 1 else 0
+            else:
+                print(data[i])
 
             if 'label_2' in data[i].keys():
                 label_2 = 1 if data[i]['label_2'] == 1 else 0
