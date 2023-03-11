@@ -70,10 +70,10 @@ class Com2SenseDataProcessor(DataProcessor):
             label_2 = None
 
             if 'label_1' in data[i].keys():
-                label_1 = 1 if data[i]['label_1'] == 1 else 0
+                label_1 = 1 if data[i]['label_1'] else 0
 
             if 'label_2' in data[i].keys():
-                label_2 = 1 if data[i]['label_2'] == 1 else 0
+                label_2 = 1 if data[i]['label_2'] else 0
 
             example_1 = Coms2SenseSingleSentenceExample(
                 guid=i, text=data[i]['sent_1'], label=label_1,
