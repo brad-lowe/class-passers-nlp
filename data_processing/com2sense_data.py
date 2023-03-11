@@ -71,8 +71,6 @@ class Com2SenseDataProcessor(DataProcessor):
 
             if 'label_1' in data[i].keys():
                 label_1 = 1 if data[i]['label_1'] == 1 else 0
-            else:
-                print(data[i])
 
             if 'label_2' in data[i].keys():
                 label_2 = 1 if data[i]['label_2'] == 1 else 0
@@ -112,6 +110,6 @@ if __name__ == "__main__":
     val_examples = proc.get_dev_examples()
     test_examples = proc.get_test_examples()
     print()
-    for i in range(min(10, len(test_examples))):
+    for i in range(min(10, len(val_examples))):
         print(test_examples[i])
     print()
