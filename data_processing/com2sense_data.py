@@ -111,5 +111,5 @@ if __name__ == "__main__":
     test_examples = proc.get_test_examples()
     print()
     for i in range(min(10, len(val_examples))):
-        print(test_examples[i])
+        print(val_examples[i])
     print()
