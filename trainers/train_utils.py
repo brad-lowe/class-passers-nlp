@@ -31,6 +31,8 @@ def evaluate_standard(preds, labels, scoring_method):
     # and F1 score for the predictions and gold labels.
     # Please also make your sci-kit learn scores are computed
     # using `scoring_method` for the `average` argument.
+    print(preds)
+    print(labels)
     acc = accuracy_score(labels, preds)
     prec = precision_score(labels, preds, average=scoring_method)
     recall = recall_score(labels, preds, average=scoring_method)
@@ -42,24 +44,16 @@ def evaluate_standard(preds, labels, scoring_method):
 
 def pairwise_accuracy(guids, preds, labels):
     acc = 0.0  # The accuracy to return.
-    
+
     ########################################################
-    # TODO: Please finish the pairwise accuracy computation.
     # Hint: Utilize the `guid` as the `guid` for each
     # statement coming from the same complementary
     # pair is identical. You can simply pair the these
     # predictions and labels w.r.t the `guid`. 
-    accs = []
-    
-    preds_chunks = [preds[x:x+2] for x in range(0, len(preds), 2)]
-    labels_chunks = [labels[x:x+2] for x in range(0, len(labels), 2)]
-
-    for i in range(len(preds_chunks)):
-        if preds_chunks[i][0] != labels_chunks[i][0] or preds_chunks[i][1] != labels_chunks[i][1]:
-            accs.append(False)
-        else:
-            accs.append(True)
-    acc = np.asarray(accs).mean()
+    y_true = labels[guids]
+    y_pred = preds[guids]
+    acc = accuracy_score(y_true, y_pred)
+    ########################################################
 
     return acc
 
